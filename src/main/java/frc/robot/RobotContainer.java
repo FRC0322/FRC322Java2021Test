@@ -16,6 +16,8 @@ import frc.robot.commands.DriveWithJoystick;
 import frc.robot.subsystems.Chassis;
 import frc.robot.utilities.F310Controller;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -28,19 +30,29 @@ public class RobotContainer {
 
 	private final Chassis m_chassis = new Chassis();
 
-	private final F310Controller m_driveStick = new F310Controller(Constants.DRIVE_STICK);
-	private final F310Controller m_manipulatorStick = new F310Controller(Constants.MANIPULATOR_STICK);
+	/*private final F310Controller m_driveStick = new F310Controller(Constants.DRIVE_STICK);
+	private final F310Controller m_manipulatorStick = new F310Controller(Constants.MANIPULATOR_STICK);*/
 
-	private final JoystickButton m_brakeButton = new JoystickButton(m_driveStick, F310Controller.Button.kA.getValue());
+	private final Joystick leftJoyStickDriver = new Joystick(2);
+	private final Joystick rightJoyStickManipulator = new Joystick(3);
+
+
+	/*private final  JoystickButton m_brakeButton = new JoystickButton(m_driveStick, F310Controller.Button.kA.getValue());*/
+	private final  JoystickButton leftJoyStickBrakeButton = new JoystickButton(leftJoyStickDriver, Joystick.ButtonType.kTop.value);
+	 
+	 
 
 	/**
 	 * The container for the robot.  Contains subsystems, OI devices, and commands.
 	 */
 	public RobotContainer() {
 		// Assign default commands
-		m_chassis.setDefaultCommand(new DriveWithJoystick(
+		/*m_chassis.setDefaultCommand(new DriveWithJoystick(
 						    ()->m_driveStick.getTriggerAxis(Hand.kRight) - m_driveStick.getTriggerAxis(Hand.kLeft),
-						    ()->(m_driveStick.getX(Hand.kLeft)), m_chassis, m_brakeButton));
+						    ()->(m_driveStick.getX(Hand.kLeft)), m_chassis, m_brakeButton));*/
+
+		m_chassis.setDefaultCommand(new DriveWithJoystick(()->leftJoyStickDriver.getY(),()-> rightJoyStickManipulator.getY(),m_chassis, leftJoyStickBrakeButton));
+
 
 		// Configure the button bindings
 		configureButtonBindings();
