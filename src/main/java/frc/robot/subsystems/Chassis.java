@@ -56,8 +56,18 @@ public class Chassis extends SubsystemBase {
 	 * @param speed  Speed in range [-1.0,1.0]
 	 * @param rotation Rotation in range [-1.0,1.0]
 	 */
-	public void drive(double speed, double rotation) {
-		m_drive.arcadeDrive(speed, rotation);
+//	public void drive(double speed, double rotation) {
+//		m_drive.arcadeDrive(speed, rotation);
+//	}
+
+	/**
+	 * Classic two stick Tank Drive style driving for the Chassis.
+	 *
+	 * @param left  Left motor speed in range [-1.0,1.0]
+	 * @param right Right motor speed in range [-1.0,1.0]
+	 */
+	public void drive(double left, double right) {
+		m_drive.tankDrive(-1*left, -1*right);
 	}
 
 	// This method sets the robot to brake when the throttle is idle.

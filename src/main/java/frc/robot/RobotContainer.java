@@ -33,12 +33,12 @@ public class RobotContainer {
 	/*private final F310Controller m_driveStick = new F310Controller(Constants.DRIVE_STICK);
 	private final F310Controller m_manipulatorStick = new F310Controller(Constants.MANIPULATOR_STICK);*/
 
-	private final Joystick leftJoyStickDriver = new Joystick(2);
-	private final Joystick rightJoyStickManipulator = new Joystick(3);
+	private final Joystick leftDriveJoyStick = new Joystick(2);
+	private final Joystick rightDriveJoyStick = new Joystick(3);
 
 
 	/*private final  JoystickButton m_brakeButton = new JoystickButton(m_driveStick, F310Controller.Button.kA.getValue());*/
-	private final  JoystickButton leftJoyStickBrakeButton = new JoystickButton(leftJoyStickDriver, Joystick.ButtonType.kTop.value);
+	private final  JoystickButton leftJoyStickBrakeButton = new JoystickButton(leftDriveJoyStick, Joystick.ButtonType.kTop.value);
 	 
 	 
 
@@ -51,11 +51,10 @@ public class RobotContainer {
 						    ()->m_driveStick.getTriggerAxis(Hand.kRight) - m_driveStick.getTriggerAxis(Hand.kLeft),
 						    ()->(m_driveStick.getX(Hand.kLeft)), m_chassis, m_brakeButton));*/
 
-		m_chassis.setDefaultCommand(new DriveWithJoystick(()->leftJoyStickDriver.getY(),
-		()-> rightJoyStickManipulator.getY()
+		m_chassis.setDefaultCommand(new DriveWithJoystick(()->leftDriveJoyStick.getY(),
+		()-> rightDriveJoyStick.getY()
 		,m_chassis, 
 		leftJoyStickBrakeButton));
-
 
 		// Configure the button bindings
 		configureButtonBindings();
