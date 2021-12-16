@@ -47,7 +47,7 @@ public class Chassis extends SubsystemBase {
 		coast(true);
 
 		// Setup the encoders
-		System.out.println("Encoders Setup");
+		//System.out.println("Encoders Setup");
 
 	}
 
