@@ -10,11 +10,8 @@ name: Robot Build 322 2021
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
   release:
-    branches: [master]
-
+    branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
