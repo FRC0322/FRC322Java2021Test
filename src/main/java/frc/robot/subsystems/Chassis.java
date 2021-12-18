@@ -17,11 +17,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Chassis extends SubsystemBase {
-/**
- * The Chassis subsystem incorporates the sensors and actuators attached to the robots chassis.
- * It includes the four drive motors (two on each side), quadrature encoders connected directly to each
- * front motor Talon SRX, and a navX-MXP IMU.
- */
+	/**
+	 * The Chassis subsystem incorporates the sensors and actuators attached to the
+	 * robots chassis. It includes the four drive motors (two on each side),
+	 * quadrature encoders connected directly to each front motor Talon SRX, and a
+	 * navX-MXP IMU.
+	 */
 
 	private final WPI_TalonSRX m_leftFrontMotor = new WPI_TalonSRX(Constants.DRIVE_LEFTFRONT);
 	private final WPI_TalonSRX m_leftRearMotor = new WPI_TalonSRX(Constants.DRIVE_LEFTREAR);
@@ -39,26 +40,26 @@ public class Chassis extends SubsystemBase {
 	public Chassis() {
 		super();
 		// Invert all four motors due to the way they're mounted.
-		m_leftMotors.setInverted(false);
-		m_rightMotors.setInverted(false);
+		m_leftMotors.setInverted(true);
+		m_rightMotors.setInverted(true);
 
 		// Change the motors to "coast" mode
 		coast(true);
 
 		// Setup the encoders
-		System.out.println("Encoders Setup");
+		//System.out.println("Encoders Setup");
 
 	}
 
 	/**
 	 * Modern racing game style driving for the Chassis.
 	 *
-	 * @param speed  Speed in range [-1.0,1.0]
+	 * @param speed    Speed in range [-1.0,1.0]
 	 * @param rotation Rotation in range [-1.0,1.0]
 	 */
-//	public void drive(double speed, double rotation) {
-//		m_drive.arcadeDrive(speed, rotation);
-//	}
+	// public void drive(double speed, double rotation) {
+	// m_drive.arcadeDrive(speed, rotation);
+	// }
 
 	/**
 	 * Classic two stick Tank Drive style driving for the Chassis.
@@ -67,18 +68,17 @@ public class Chassis extends SubsystemBase {
 	 * @param right Right motor speed in range [-1.0,1.0]
 	 */
 	public void drive(double left, double right) {
-		m_drive.tankDrive(-1*left, -1*right);
+		m_drive.tankDrive(left, right);
 	}
 
 	// This method sets the robot to brake when the throttle is idle.
 	public void brake(boolean brake) {
-		if(brake) {
+		if (brake) {
 			m_leftFrontMotor.setNeutralMode(NeutralMode.Brake);
 			m_leftRearMotor.setNeutralMode(NeutralMode.Brake);
 			m_rightFrontMotor.setNeutralMode(NeutralMode.Brake);
 			m_rightRearMotor.setNeutralMode(NeutralMode.Brake);
-		}
-		else {
+		} else {
 			m_leftFrontMotor.setNeutralMode(NeutralMode.Coast);
 			m_leftRearMotor.setNeutralMode(NeutralMode.Coast);
 			m_rightFrontMotor.setNeutralMode(NeutralMode.Coast);
@@ -94,8 +94,7 @@ public class Chassis extends SubsystemBase {
 			m_rightFrontMotor.setNeutralMode(NeutralMode.Coast);
 			m_rightRearMotor.setNeutralMode(NeutralMode.Coast);
 
-		}
-		else {
+		} else {
 			m_leftFrontMotor.setNeutralMode(NeutralMode.Brake);
 			m_leftRearMotor.setNeutralMode(NeutralMode.Brake);
 			m_rightFrontMotor.setNeutralMode(NeutralMode.Brake);
